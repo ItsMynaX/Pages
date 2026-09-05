@@ -4,107 +4,328 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ItsMynaX — Projects</title>
+
+  <!-- Modern font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#0f1724; --card:#0b1220; --muted:#98a0b3; --accent:#6ee7b7;
-      --glass: rgba(255,255,255,0.03);
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --bg1: #071124; --bg2:#0b1b2f;
+      --glass: rgba(255,255,255,0.04);
+      --muted: #9fb0c9;
+      --accent: #7ef3c3;
+      --accent-2: #5bd0ff;
+      --card-outline: rgba(255,255,255,0.04);
+      --glass-strong: rgba(255,255,255,0.06);
+      --glass-weak: rgba(255,255,255,0.02);
+      --radius: 14px;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071029 0%, #071428 100%);color:#e6eef6}
-    .container{max-width:980px;margin:48px auto;padding:28px;background:var(--glass);border-radius:12px;box-shadow:0 6px 30px rgba(2,6,23,0.6);backdrop-filter: blur(6px);}
-    header{display:flex;gap:18px;align-items:center}
-    img.avatar{width:96px;height:96px;border-radius:14px;border:2px solid rgba(255,255,255,0.06);object-fit:cover}
-    h1{margin:0;font-size:28px}
-    p.lead{margin:6px 0 0;color:var(--muted)}
-    .repos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:22px}
-    .repo{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
-    .repo h3{margin:0 0 6px;font-size:16px}
-    .meta{font-size:13px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
-    a.repo-link{color:var(--accent);text-decoration:none}
-    footer{margin-top:20px;color:var(--muted);font-size:13px}
-    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .tag{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:999px;font-size:12px;color:var(--muted)}
-    @media (max-width:520px){header{flex-direction:column;align-items:flex-start}img.avatar{width:72px;height:72px}}
+
+    /* animated gradient background */
+    html,body{height:100%;margin:0}
+    body{
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(101,73,255,0.09), transparent 5%),
+                  radial-gradient(1000px 400px at 90% 80%, rgba(91,208,255,0.04), transparent 5%),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      color: #e6f2ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding: clamp(20px, 4vw, 48px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .wrap{
+      width: min(1100px, 96%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: 20px;
+      padding: clamp(18px, 3.4vw, 36px);
+      box-shadow: 0 10px 40px rgba(2,6,23,0.7);
+      border: 1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(8px) saturate(120%);
+    }
+
+    header{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      flex-wrap:wrap;
+    }
+
+    .profile{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      min-width:0;
+    }
+
+    .avatar{
+      width:96px;height:96px;border-radius:18px;object-fit:cover;
+      border:1px solid var(--card-outline);
+      box-shadow: 0 6px 22px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      flex-shrink:0;
+    }
+
+    .title{
+      min-width:0;
+    }
+    .title h1{margin:0;font-weight:800;font-size:20px;letter-spacing:0.2px}
+    .title p{margin:6px 0 0;color:var(--muted);font-size:14px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+    .actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-left:auto;
+    }
+
+    .btn{
+      background: linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#02202a;
+      padding:10px 14px;border-radius:999px;font-weight:700;border:none;cursor:pointer;
+      box-shadow: 0 6px 20px rgba(125,238,202,0.12);
+      display:inline-flex;gap:10px;align-items:center;font-size:13px;text-decoration:none;
+    }
+    .btn.ghost{
+      background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600;
+    }
+
+    /* Repos grid */
+    .repos{
+      margin-top:20px;
+      display:grid;
+      gap:14px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border-radius: 12px;
+      padding:14px;
+      border:1px solid var(--card-outline);
+      transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+      transform-origin:center;
+      will-change:transform;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .card:hover{
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 18px 50px rgba(2,6,23,0.6);
+    }
+
+    .card h3{margin:0;font-size:15px}
+    .card p{margin:0;color:var(--muted);font-size:13px;min-height:38px}
+    .meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+    .pill{padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);font-weight:600}
+
+    .repo-stats{margin-left:auto;display:flex;gap:8px;align-items:center;color:var(--muted);font-size:12px}
+    .row{display:flex;align-items:center;gap:8px}
+
+    /* loading skeleton */
+    .skeleton{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.04), rgba(255,255,255,0.02));border-radius:8px;min-height:12px;animation:shimmer 1.2s linear infinite}
+    @keyframes shimmer{0%{background-position:-200px 0}100%{background-position:200px 0}}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+
+    a.repo-link{color:inherit;text-decoration:none}
+    a.repo-link:hover{text-decoration:underline}
+
+    /* responsive tweaks */
+    @media (max-width:640px){
+      .avatar{width:72px;height:72px}
+      .title h1{font-size:18px}
+      .repos{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+    }
   </style>
 </head>
 <body>
-  <main class="container" role="main">
+  <main class="wrap" role="main">
     <header>
-      <img class="avatar" src="https://avatars.githubusercontent.com/u/251846507?v=4" alt="ItsMynaX avatar" />
-      <div>
-        <h1>ItsMynaX</h1>
-        <p class="lead">Hi — I'm ItsMynaX. This page introduces me and links to my public GitHub repositories.</p>
-        <div class="tags" aria-hidden="true">
-          <span class="tag">GitHub: <a href="https://github.com/ItsMynaX" class="repo-link" style="color:inherit">ItsMynaX</a></span>
-          <span class="tag">Last updated: 2026-09-05</span>
+      <div class="profile" aria-hidden="false">
+        <img class="avatar" id="avatar" src="https://avatars.githubusercontent.com/u/251846507?v=4" alt="ItsMynaX avatar" />
+        <div class="title">
+          <h1 id="username">ItsMynaX</h1>
+          <p id="bio">Developer • tinkerer • tools & system utilities — repos below are live from GitHub</p>
         </div>
+      </div>
+
+      <div class="actions" aria-hidden="false">
+        <a class="btn" id="visit" href="https://github.com/ItsMynaX" target="_blank" rel="noopener">
+          View on GitHub
+        </a>
+        <button class="btn ghost" id="refresh">Refresh</button>
       </div>
     </header>
 
-    <section aria-labelledby="projects" style="margin-top:20px">
-      <h2 id="projects" style="font-size:18px;margin:0 0 10px">Public repositories</h2>
+    <section aria-labelledby="projects" style="margin-top:18px">
+      <div style="display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap">
+        <h2 id="projects" style="margin:0;font-size:16px">Public repositories</h2>
+        <div style="color:var(--muted);font-size:13px">Sorted by recent activity</div>
+      </div>
 
-      <div class="repos">
-        <article class="repo" id="myna-task-full">
-          <h3><a class="repo-link" href="https://github.com/ItsMynaX/Myna-Task-Full" target="_blank" rel="noopener">Myna-Task-Full</a></h3>
-          <div class="meta">
-            <span>Language: Batchfile</span>
-            <span>License: MIT</span>
-            <span>Pushed: 2026-09-05T05:38:40Z</span>
-            <span>Size: 12074 KB</span>
-          </div>
-          <p style="margin-top:10px;color:var(--muted)">Full-featured Myna task repository.</p>
-        </article>
-
-        <article class="repo" id="myna-task-lite">
-          <h3><a class="repo-link" href="https://github.com/ItsMynaX/Myna-Task-Lite" target="_blank" rel="noopener">Myna-Task-Lite</a></h3>
-          <div class="meta">
-            <span>Language: Batchfile</span>
-            <span>License: MIT</span>
-            <span>Pushed: 2026-09-05T05:38:04Z</span>
-            <span>Size: 9094 KB</span>
-          </div>
-          <p style="margin-top:10px;color:var(--muted)">A lighter version of the Myna task toolset.</p>
-        </article>
-
-        <article class="repo" id="pages">
-          <h3><a class="repo-link" href="https://github.com/ItsMynaX/Pages" target="_blank" rel="noopener">Pages</a></h3>
-          <div class="meta">
-            <span>Language: —</span>
-            <span>License: —</span>
-            <span>Pushed: 2026-09-05T08:04:33Z</span>
-            <span>Size: 0 KB</span>
-          </div>
-          <p style="margin-top:10px;color:var(--muted)">Repository intended for hosting site/pages (empty at time of snapshot).</p>
-        </article>
-
-        <article class="repo" id="source">
-          <h3><a class="repo-link" href="https://github.com/ItsMynaX/Source" target="_blank" rel="noopener">Source</a></h3>
-          <div class="meta">
-            <span>Language: C++</span>
-            <span>License: MIT</span>
-            <span>Pushed: 2026-09-05T05:35:28Z</span>
-            <span>Size: 22 KB</span>
-          </div>
-          <p style="margin-top:10px;color:var(--muted)">C++ source code and related material.</p>
-        </article>
-
-        <article class="repo" id="system-optimizer">
-          <h3><a class="repo-link" href="https://github.com/ItsMynaX/System-Optimizer" target="_blank" rel="noopener">System-Optimizer</a></h3>
-          <div class="meta">
-            <span>Language: —</span>
-            <span>License: MIT</span>
-            <span>Pushed: 2026-09-05T05:37:16Z</span>
-            <span>Size: 30 KB</span>
-          </div>
-          <p style="margin-top:10px;color:var(--muted)">Utilities and scripts for optimizing system settings and performance.</p>
-        </article>
+      <div id="repos" class="repos" aria-live="polite" aria-busy="true" style="margin-top:12px">
+        <!-- skeleton placeholders -->
+        <div class="card"><div class="skeleton" style="height:18px;width:60%"></div><div class="skeleton" style="height:12px;width:90%"></div><div style="display:flex;gap:8px;margin-top:8px"><div class="skeleton" style="height:28px;width:90px;border-radius:999px"></div><div class="skeleton" style="height:28px;width:60px;border-radius:999px"></div></div></div>
+        <div class="card"><div class="skeleton" style="height:18px;width:55%"></div><div class="skeleton" style="height:12px;width:80%"></div><div style="display:flex;gap:8px;margin-top:8px"><div class="skeleton" style="height:28px;width:90px;border-radius:999px"></div><div class="skeleton" style="height:28px;width:60px;border-radius:999px"></div></div></div>
+        <div class="card"><div class="skeleton" style="height:18px;width:45%"></div><div class="skeleton" style="height:12px;width:75%"></div><div style="display:flex;gap:8px;margin-top:8px"><div class="skeleton" style="height:28px;width:90px;border-radius:999px"></div><div class="skeleton" style="height:28px;width:60px;border-radius:999px"></div></div></div>
       </div>
     </section>
 
     <footer>
-      <p>Want this page published to a GitHub Pages site or customized (theme, bio, repo descriptions)? Reply and I’ll update the file or push it into a repo for you.</p>
+      <div>Want this page published to GitHub Pages or styled differently? I can commit it for you — tell me which repo & branch.</div>
+      <div style="color:var(--muted)">Updated: <span id="last-updated">—</span></div>
     </footer>
   </main>
+
+  <script>
+    // Configuration
+    const GH_USER = 'ItsMynaX';
+    const PER_PAGE = 100;
+
+    // helpers
+    const el = (selector) => document.querySelector(selector);
+    const reposEl = el('#repos');
+    const lastUpdatedEl = el('#last-updated');
+    const avatarEl = el('#avatar');
+    const usernameEl = el('#username');
+    const bioEl = el('#bio');
+    const refreshBtn = el('#refresh');
+
+    async function fetchUser() {
+      const r = await fetch(`https://api.github.com/users/${GH_USER}`);
+      if (!r.ok) throw new Error('Failed to fetch user');
+      return r.json();
+    }
+
+    async function fetchRepos() {
+      // request up to PER_PAGE repos
+      const r = await fetch(`https://api.github.com/users/${GH_USER}/repos?per_page=${PER_PAGE}`);
+      if (!r.ok) throw new Error('Failed to fetch repos');
+      return r.json();
+    }
+
+    function timeAgo(dateStr){
+      const d = new Date(dateStr);
+      const diff = (Date.now() - d.getTime()) / 1000;
+      if (diff < 60) return Math.floor(diff) + 's ago';
+      if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+      if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+      if (diff < 2592000) return Math.floor(diff/86400) + 'd ago';
+      return d.toLocaleDateString();
+    }
+
+    function createRepoCard(repo){
+      const a = document.createElement('a');
+      a.href = repo.html_url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.className = 'repo-link';
+      a.style.textDecoration = 'none';
+      a.style.color = 'inherit';
+
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.setAttribute('title', repo.description || '');
+
+      // header row
+      const h3 = document.createElement('h3');
+      h3.textContent = repo.name;
+      const desc = document.createElement('p');
+      desc.textContent = repo.description || 'No description';
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      const lang = document.createElement('span');
+      lang.className = 'pill';
+      lang.textContent = repo.language || '—';
+      const updated = document.createElement('span');
+      updated.textContent = timeAgo(repo.pushed_at);
+      updated.title = new Date(repo.pushed_at).toLocaleString();
+
+      const stats = document.createElement('div');
+      stats.className = 'repo-stats';
+      stats.innerHTML = `
+        <span title="Stars">★ ${repo.stargazers_count}</span>
+        <span title="Forks">⎇ ${repo.forks_count}</span>
+      `;
+
+      const bottom = document.createElement('div');
+      bottom.style.display = 'flex';
+      bottom.style.alignItems = 'center';
+      bottom.style.gap = '8px';
+      bottom.appendChild(lang);
+      bottom.appendChild(updated);
+      bottom.appendChild(stats);
+
+      card.appendChild(h3);
+      card.appendChild(desc);
+      card.appendChild(bottom);
+
+      a.appendChild(card);
+      return a;
+    }
+
+    async function render() {
+      reposEl.setAttribute('aria-busy', 'true');
+      // clear
+      reposEl.innerHTML = '';
+      try {
+        const [user, repos] = await Promise.all([fetchUser(), fetchRepos()]);
+        // update profile
+        avatarEl.src = user.avatar_url;
+        usernameEl.textContent = user.login;
+        bioEl.textContent = user.bio || "Developer • tinkerer • tools & system utilities";
+
+        // sort repos by pushed_at desc
+        repos.sort((a,b)=> new Date(b.pushed_at) - new Date(a.pushed_at));
+
+        // map to cards
+        if (repos.length === 0) {
+          const none = document.createElement('div');
+          none.style.color = 'var(--muted)';
+          none.style.padding = '18px';
+          none.textContent = 'No public repositories found.';
+          reposEl.appendChild(none);
+        } else {
+          for (const r of repos) {
+            const card = createRepoCard(r);
+            reposEl.appendChild(card);
+          }
+        }
+
+        lastUpdatedEl.textContent = new Date().toLocaleString();
+        reposEl.setAttribute('aria-busy', 'false');
+      } catch (err) {
+        reposEl.innerHTML = '';
+        const errNode = document.createElement('div');
+        errNode.style.color = 'tomato';
+        errNode.style.padding = '14px';
+        errNode.textContent = 'Could not load repositories. (Rate limits or network error)';
+        reposEl.appendChild(errNode);
+        reposEl.setAttribute('aria-busy', 'false');
+        console.error(err);
+      }
+    }
+
+    // initial render
+    render();
+
+    // refresh button
+    refreshBtn.addEventListener('click', () => {
+      refreshBtn.textContent = 'Refreshing...';
+      refreshBtn.disabled = true;
+      render().finally(()=>{
+        refreshBtn.textContent = 'Refresh';
+        refreshBtn.disabled = false;
+      });
+    });
+  </script>
 </body>
 </html>
