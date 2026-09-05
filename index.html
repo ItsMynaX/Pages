@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ItsMynaX — Projects</title>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#98a0b3; --accent:#6ee7b7;
+      --glass: rgba(255,255,255,0.03);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071029 0%, #071428 100%);color:#e6eef6}
+    .container{max-width:980px;margin:48px auto;padding:28px;background:var(--glass);border-radius:12px;box-shadow:0 6px 30px rgba(2,6,23,0.6);backdrop-filter: blur(6px);}
+    header{display:flex;gap:18px;align-items:center}
+    img.avatar{width:96px;height:96px;border-radius:14px;border:2px solid rgba(255,255,255,0.06);object-fit:cover}
+    h1{margin:0;font-size:28px}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+    .repos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:22px}
+    .repo{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .repo h3{margin:0 0 6px;font-size:16px}
+    .meta{font-size:13px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
+    a.repo-link{color:var(--accent);text-decoration:none}
+    footer{margin-top:20px;color:var(--muted);font-size:13px}
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .tag{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:999px;font-size:12px;color:var(--muted)}
+    @media (max-width:520px){header{flex-direction:column;align-items:flex-start}img.avatar{width:72px;height:72px}}
+  </style>
+</head>
+<body>
+  <main class="container" role="main">
+    <header>
+      <img class="avatar" src="https://avatars.githubusercontent.com/u/251846507?v=4" alt="ItsMynaX avatar" />
+      <div>
+        <h1>ItsMynaX</h1>
+        <p class="lead">Hi — I'm ItsMynaX. This page introduces me and links to my public GitHub repositories.</p>
+        <div class="tags" aria-hidden="true">
+          <span class="tag">GitHub: <a href="https://github.com/ItsMynaX" class="repo-link" style="color:inherit">ItsMynaX</a></span>
+          <span class="tag">Last updated: 2026-09-05</span>
+        </div>
+      </div>
+    </header>
+
+    <section aria-labelledby="projects" style="margin-top:20px">
+      <h2 id="projects" style="font-size:18px;margin:0 0 10px">Public repositories</h2>
+
+      <div class="repos">
+        <article class="repo" id="myna-task-full">
+          <h3><a class="repo-link" href="https://github.com/ItsMynaX/Myna-Task-Full" target="_blank" rel="noopener">Myna-Task-Full</a></h3>
+          <div class="meta">
+            <span>Language: Batchfile</span>
+            <span>License: MIT</span>
+            <span>Pushed: 2026-09-05T05:38:40Z</span>
+            <span>Size: 12074 KB</span>
+          </div>
+          <p style="margin-top:10px;color:var(--muted)">Full-featured Myna task repository.</p>
+        </article>
+
+        <article class="repo" id="myna-task-lite">
+          <h3><a class="repo-link" href="https://github.com/ItsMynaX/Myna-Task-Lite" target="_blank" rel="noopener">Myna-Task-Lite</a></h3>
+          <div class="meta">
+            <span>Language: Batchfile</span>
+            <span>License: MIT</span>
+            <span>Pushed: 2026-09-05T05:38:04Z</span>
+            <span>Size: 9094 KB</span>
+          </div>
+          <p style="margin-top:10px;color:var(--muted)">A lighter version of the Myna task toolset.</p>
+        </article>
+
+        <article class="repo" id="pages">
+          <h3><a class="repo-link" href="https://github.com/ItsMynaX/Pages" target="_blank" rel="noopener">Pages</a></h3>
+          <div class="meta">
+            <span>Language: —</span>
+            <span>License: —</span>
+            <span>Pushed: 2026-09-05T08:04:33Z</span>
+            <span>Size: 0 KB</span>
+          </div>
+          <p style="margin-top:10px;color:var(--muted)">Repository intended for hosting site/pages (empty at time of snapshot).</p>
+        </article>
+
+        <article class="repo" id="source">
+          <h3><a class="repo-link" href="https://github.com/ItsMynaX/Source" target="_blank" rel="noopener">Source</a></h3>
+          <div class="meta">
+            <span>Language: C++</span>
+            <span>License: MIT</span>
+            <span>Pushed: 2026-09-05T05:35:28Z</span>
+            <span>Size: 22 KB</span>
+          </div>
+          <p style="margin-top:10px;color:var(--muted)">C++ source code and related material.</p>
+        </article>
+
+        <article class="repo" id="system-optimizer">
+          <h3><a class="repo-link" href="https://github.com/ItsMynaX/System-Optimizer" target="_blank" rel="noopener">System-Optimizer</a></h3>
+          <div class="meta">
+            <span>Language: —</span>
+            <span>License: MIT</span>
+            <span>Pushed: 2026-09-05T05:37:16Z</span>
+            <span>Size: 30 KB</span>
+          </div>
+          <p style="margin-top:10px;color:var(--muted)">Utilities and scripts for optimizing system settings and performance.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <p>Want this page published to a GitHub Pages site or customized (theme, bio, repo descriptions)? Reply and I’ll update the file or push it into a repo for you.</p>
+    </footer>
+  </main>
+</body>
+</html>
